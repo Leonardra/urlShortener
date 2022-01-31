@@ -2,16 +2,13 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"urlShortener/handler"
-	"urlShortener/model"
+	"urlShortener/Routes"
 )
 func main() {
-	r := gin.Default()
+	router := gin.Default()
 
-	db := model.CreateUrlDataBase()
-	r.GET("/", handler.GetPing)
-	r.POST("/", handler.ShortenUrl(db))
-	err := r.Run()
+	Routes.UrlRouters(router)
+	err := router.Run()
 	if err != nil {
 		return 
 	}
